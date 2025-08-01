@@ -11,4 +11,4 @@ Mentor LLM é um agente de IA desenvolvido para atuar como um orientador de pós
 ```bash
 pip install -r requirements.txt
 streamlit run app.py
-<!-- deploy -->
+<!-- deploy ..-->
