@@ -1,26 +1,34 @@
-name: Deploy to Hugging Face Spaces
+name: Deploy to Hugging Face Space
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main  # ou a branch que você estiver usando
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout
+      - name: Checkout repo
         uses: actions/checkout@v3
 
-      - name: Install Git LFS
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install huggingface_hub
         run: |
-          sudo apt-get install git-lfs
-          git lfs install
+          pip install huggingface_hub
 
       - name: Push to Hugging Face Space
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: |
-          git config --global user.email "you@example.com"
-          git config --global user.name "Your Name"
-          git remote add space https://Evandro-Saints:${HF_TOKEN}@huggingface.co/spaces/Evandro-Saints/mentor-llm
-          git push space main --force
+          huggingface-cli login --token $HF_TOKEN
+          huggingface-cli repo create mentor-llm --type=space --space-sdk=gradio --yes || true
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git remote add hf https://huggingface.co/spaces/Evandro-Saints/mentor-llm
+          git push hf main --force
