@@ -28,5 +28,6 @@ jobs:
           huggingface-cli repo create mentor-llm --type=space --yes || true
           git config --global user.email "mentor@llm.com"
           git config --global user.name "Mentor LLM Bot"
+          git remote remove space || true
           git remote add space https://Evandro-Saints:${HF_TOKEN}@huggingface.co/spaces/Evandro-Saints/mentor-llm
           git push space main --force
