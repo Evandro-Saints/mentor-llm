@@ -1,25 +1,16 @@
 from huggingface_hub import InferenceClient
-from langchain.chains import LLMChain
-from langchain.prompts import PromptTemplate
-from langchain.llms import HuggingFaceHub
-
-import os
-
-# Substitua pelo seu token Hugging Face (ou carregue via dotenv)
-HUGGINGFACE_TOKEN = os.getenv("HUGGINGFACEHUB_API_TOKEN")
 
 client = InferenceClient(
-    model="mistralai/Mistral-7B-Instruct-v0.2",
-    token=HUGGINGFACE_TOKEN
+    model="tiiuae/falcon-7b-instruct",  # modelo que funciona com text-generation
+    token=seu_token_aqui
 )
 
-def get_response(question):
-    # Gera texto com parâmetros definidos
+def get_response(prompt):
     response = client.text_generation(
-        prompt=question,
-        max_new_tokens=512,
+        prompt,
+        max_new_tokens=256,
         temperature=0.7,
-        do_sample=True,
+        top_p=0.95,
         repetition_penalty=1.1
     )
-    return response.strip()
+    return response
