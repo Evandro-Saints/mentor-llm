@@ -1,16 +1,15 @@
 import streamlit as st
 from llm_agent import get_response
 
-st.set_page_config(page_title="Mentor LLM", layout="centered")
+st.set_page_config(page_title="Mentor LLM")
 st.title("🤖 Mentor LLM")
-st.markdown("Seu orientador pessoal sobre Large Language Models, direto do futuro.")
-st.markdown("❓ Pergunte qualquer coisa sobre LLMs")
+st.markdown("Seu orientador pessoal sobre LLMs.")
 
-query = st.text_input("Digite sua pergunta aqui:")
+query = st.text_input("O que você quer saber sobre LLMs?")
 
 if query:
     try:
-        response = get_response(query)
-        st.success(response)
+        answer = get_response(query)
+        st.success(answer)
     except Exception as e:
         st.error(f"Ocorreu um erro: {e}")
