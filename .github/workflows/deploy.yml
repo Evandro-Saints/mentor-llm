@@ -2,32 +2,27 @@ name: Deploy to Hugging Face Space
 
 on:
   push:
-    branches:
-      - main
+    branches: [main]
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v3
-
-      - name: Set up Python
-        uses: actions/setup-python@v4
+      - uses: actions/checkout@v3
         with:
-          python-version: '3.10'
+          fetch-depth: 0
+          lfs: true
 
-      - name: Install huggingface_hub
-        run: pip install huggingface_hub
+      - name: Configure git credentials
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: |
+          git config --global credential.helper store
+          echo "https://user:${HF_TOKEN}@huggingface.co" > ~/.git-credentials
 
       - name: Push to Hugging Face Space
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: |
-          huggingface-cli login --token $HF_TOKEN
-          huggingface-cli repo create mentor-llm --type=space --space-sdk=gradio --yes || true
-          git config user.name "github-actions"
-          git config user.email "github-actions@github.com"
           git remote add hf https://huggingface.co/spaces/Evandro-Saints/mentor-llm
-          git push hf main --force
+          git push --force hf main
