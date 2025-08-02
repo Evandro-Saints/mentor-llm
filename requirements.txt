@@ -6,3 +6,7 @@ transformers
 requests
 python-dotenv
 langchain==0.2.1
+python-dotenv
+langchain>=0.1.17
+langchain-core>=0.1.49
+langchain-huggingface>=0.0.6
