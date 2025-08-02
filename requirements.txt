@@ -1,4 +1,5 @@
 transformers
-torch
 accelerate
+bitsandbytes
 gradio
+torch
