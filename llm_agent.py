@@ -3,14 +3,12 @@ from langchain_community.llms import HuggingFaceEndpoint
 from langchain.prompts import PromptTemplate
 from langchain.chains import LLMChain
 
-# Instancia via endpoint (funciona com Falcon, DeepSeek, etc)
+# Agora com os parâmetros certos!
 llm = HuggingFaceEndpoint(
     repo_id="tiiuae/falcon-7b-instruct",
     huggingfacehub_api_token=os.getenv("HUGGINGFACEHUB_API_TOKEN"),
-    model_kwargs={
-        "temperature": 0.7,
-        "max_new_tokens": 512
-    }
+    temperature=0.7,
+    max_new_tokens=512
 )
 
 prompt = PromptTemplate(
