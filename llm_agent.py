@@ -2,7 +2,7 @@ from huggingface_hub import InferenceClient
 
 client = InferenceClient(
     model="tiiuae/falcon-7b-instruct",  # modelo que funciona com text-generation
-    token=seu_token_aqui
+    token=hf_token
 )
 
 def get_response(prompt):
