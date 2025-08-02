@@ -5,3 +5,4 @@ huggingface_hub
 transformers
 requests
 python-dotenv
+langchain==0.2.1
