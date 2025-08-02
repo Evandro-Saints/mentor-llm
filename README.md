@@ -1,15 +1,11 @@
 ---
-title: Meu App Incrível
-emoji: 🚀
-colorFrom: blue
-colorTo: green
-sdk: gradio
-sdk_version: 5.39.0
+title: Mentor LLM
+emoji: 🧠
+colorFrom: purple
+colorTo: pink
+sdk: streamlit
+sdk_version: "1.35.0"
 app_file: app.py
 pinned: false
 ---
-
-
 ## Mentor LLM
-
-Mentor em LLMs rodando com Falcon 7B via Hugging Face Spaces (Gradio).
